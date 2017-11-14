@@ -1,0 +1,2 @@
+include wow-addon-manager/config *.json
+include wow-addon-manager/docs *.md *.txt

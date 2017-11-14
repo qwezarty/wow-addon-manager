@@ -38,9 +38,9 @@ git clone https://github.com/qwezarty/wow-addon-manager.git
 # 进入仓库
 cd wow-addon-manager
 # 安装依赖（Linux可能需要加入'sudo'前缀）
-pip install -r requirements.txt
+pip install -r requires.txt
 # 运行程序
-python app/app.py
+python wow-addon-manager/app.py
 ```
 
 ## 使用和配置

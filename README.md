@@ -38,9 +38,9 @@ git clone https://github.com/qwezarty/wow-addon-manager.git
 # go into the repository
 cd wow-addon-manager
 # install dependencies(or using 'sudo' prefix if permission denied)
-pip install -r requirements.txt
+pip install -r requires.txt
 # run the app
-python app/app.py
+python wow-addon-manager/app.py
 ```
 
 ## Usage and config
