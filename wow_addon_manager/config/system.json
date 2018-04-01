@@ -1,4 +1,5 @@
 {
-    "run_mode": "debug"
-    
+    "run_mode": "debug",
+    "secret_key": "devkey",
+    "default_source": "curse"
 }
