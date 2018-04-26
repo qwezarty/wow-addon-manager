@@ -13,7 +13,7 @@
 
 import sys
 import os
-from .config import Config
+from config import Config
 
 class App:
     """main application"""
@@ -26,6 +26,7 @@ class App:
             root_path = self.get_root_path(import_name)
         self.root_path = root_path
         self.config = self.make_config()
+        self.user_config = self.config.from_json()
 
     def get_root_path(self, import_name):
         """find the root path of the package"""
@@ -39,3 +40,4 @@ class App:
     def make_config(self):
         """initial config"""
         return self.config_class(self.root_path)
+    
