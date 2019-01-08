@@ -1,7 +1,8 @@
 # WOW Addon Manager
 
-*A **cli tool** for maintaining **World of Warcraft** addons. Built with python3.6.*
+*A **cli tool** for maintaining **World of Warcraft** addons. Built with python3.7.*
 
+[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)]( https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)
 [![切换中文](https://img.shields.io/badge/README-%20切换中文-yellow.svg)](README_zh.md)
 
 ## Important

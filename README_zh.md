@@ -1,7 +1,8 @@
 # WOW Addon Manager
 
-*这是一个**魔兽世界**的**命令行**插件管理工具. 使用Python3.6构建.*
+*这是一个**魔兽世界**的**命令行**插件管理工具. 使用Python3.7构建.*
 
+[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)]( https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)
 [![Change Language](https://img.shields.io/badge/README-%20English-yellow.svg)](README.md)
 
 ## 重要的碎碎念
