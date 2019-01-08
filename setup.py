@@ -4,7 +4,7 @@
     setup.py
     ~~~~~~~~~~~~~~~~~~~~~
 
-    Setup and package infos.
+    Setup package infos.
 
     :author: qwezarty
     :date: 03:43 pm Nov 14 2017
@@ -28,5 +28,9 @@ setup(
     # data_files=[('config', ['system.json', 'user.sample.json'])],
     packages=find_packages(),
     include_package_data=True,
+    data_files = [
+        ('wow_addon_manager/configs', ['system.json', 'user.sample.json'])
+    ],
+    platforms = "any",
     install_requires=["requests"]
 )

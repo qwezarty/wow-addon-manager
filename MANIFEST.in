@@ -1,2 +1,1 @@
-include wow-addon-manager/config *.json
-include wow-addon-manager/docs *.md *.txt
+recursive-include wow_addon_manager/configs *.json
