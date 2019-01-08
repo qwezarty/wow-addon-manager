@@ -23,7 +23,7 @@ class App:
         if root_path is None:
             root_path = self.get_root_path(import_name)
         self.root_path = root_path
-        self.system_config = self.make_config("config/system.json")
+        self.system_config = self.make_config("configs/system.json")
         self.user_config = self.make_config(self.system_config["user_config"])
 
     def get_root_path(self, import_name):
