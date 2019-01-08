@@ -22,6 +22,7 @@ class Config(dict):
         self.root_path = root_path
 
     def from_mapping(self, *mapping, **kwargs):
+        """add a mapping or mapping list to self"""
         mappings = []
         if len(mapping) == 1:
             if hasattr(mapping[0], 'items'):
@@ -38,6 +39,7 @@ class Config(dict):
         return True
 
     def from_json(self, file_name):
+        """load a json file and add them to self"""
         filename = os.path.join(self.root_path, file_name)
         try:
             with open(filename) as json_file:

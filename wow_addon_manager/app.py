@@ -13,20 +13,18 @@
 
 import sys
 import os
-from config import Config
+from .config import Config
 
 class App:
     """main application"""
-
-    config_class = Config
 
     def __init__(self, import_name, root_path=None):
         self.import_name = import_name
         if root_path is None:
             root_path = self.get_root_path(import_name)
         self.root_path = root_path
-        self.config = self.make_config()
-        self.user_config = self.config.from_json()
+        self.system_config = self.make_config("config/system.json")
+        self.user_config = self.make_config(self.system_config["user_config"])
 
     def get_root_path(self, import_name):
         """find the root path of the package"""
@@ -36,8 +34,9 @@ class App:
         # loader = pkgutil.get_loader(import_name)
         # if loader is None or import_name == '__main__':
         return os.getcwd()
-
-    def make_config(self):
-        """initial config"""
-        return self.config_class(self.root_path)
     
+    def make_config(self, file_name):
+        """get an instance of Config, and load a json file"""
+        config = Config(self.root_path)
+        config.from_json(file_name)
+        return config
