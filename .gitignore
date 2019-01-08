@@ -103,3 +103,4 @@ ENV/
 # Ide and Platform
 /.vscode
 *.swp
+*.DS_Store
