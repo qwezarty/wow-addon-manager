@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+
+"""
+    wow_addon_manager.cli
+    ~~~~~~~~~~~~~~~~~~~~~
+
+    A simple command line application to run wow-addon-manager apps.
+
+    :author: qwezarty
+    :date: 07:35 pm Jan 08 2019
+    :email: qwezarty@gmail.com
+"""
+
 import sys
 import argparse
 from wow_addon_manager import install

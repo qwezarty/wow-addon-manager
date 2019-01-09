@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    config.py
+    wow_addon_manager.config
     ~~~~~~~~~~~~~~~~~~~~~
 
     Implements the config from file to object.

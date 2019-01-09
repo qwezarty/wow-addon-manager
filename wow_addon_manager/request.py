@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    request.py
+    wow_addon_manager.request
     ~~~~~~~~~~~~~~~~~~~~~
 
     Implements the basic request to web.

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    app.py
+    wow_addon_manager.app
     ~~~~~~~~~~~~~~~~~~~~~
 
     The main application.

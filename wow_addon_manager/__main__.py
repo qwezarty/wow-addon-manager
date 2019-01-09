@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-    app.py
+    wow_addon_manager.__main__
     ~~~~~~~~~~~~~~~~~~~~~
 
     Alias for wow-addon-manager for command line.
