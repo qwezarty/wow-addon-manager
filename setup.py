@@ -32,5 +32,11 @@ setup(
         ('wow_addon_manager/configs', ['system.json', 'user.sample.json'])
     ],
     platforms = "any",
-    install_requires=["requests"]
+    install_requires=["requests"],
+    entry_points = {
+        'console_scripts': [
+            'wam = wow_addon_manager.cli:main',
+            'wow_addon_manager = wow_addon_manager.cli:main',
+        ]
+    }
 )
