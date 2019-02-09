@@ -21,9 +21,18 @@ class Curseforge():
     def analyze_details(self, res):
         """analyze response and return a standard addon entity"""
         html = etree.HTML(res.text)
-        # name = html.xpath('//header//h2[@*="name"]')[0].text
         name = helpers.xpath_text(html, '//header//h2[@*="name"]')
-        # game_version = html.xpath('//header')
-        # last_update = html.xpath('//header//span[@class="stats--last-updated"]/abbr')[0].text
-        print(name)
-        return True
+        raw_game_version = helpers.xpath_text(html, '//header//span[@class="stats--game-version"]')
+        game_version = self._handle_game_version(raw_game_version)
+        last_update = helpers.xpath_text(html, '//header//span[@class="stats--last-updated"]/abbr')
+        return {
+            'name': name,
+            'game_version': game_version,
+            'last_update': last_update,
+            'url': res.url
+        }
+
+    def _handle_game_version(self, game_version):
+        """change Game Version: 8.1.0 --> '8.1.0"""
+        l = game_version.split(' ')
+        return l[len(l)-1]

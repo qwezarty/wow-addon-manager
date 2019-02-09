@@ -25,6 +25,7 @@ class Request:
         self.headers = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.2 Safari/605.1.15'}
 
     def _get_source(self, source_name):
+        """init the source class"""
         if source_name == 'curseforge':
             self.source_name = source_name
             return Curseforge()
@@ -34,9 +35,6 @@ class Request:
         else:
             raise ValueError('source name is invalid.')
 
-    def _cache_response(self, file_name):
-        pass
-
     def change_source(self, source_name):
         """change request source, 
         curseforge and wowinterface is supported for now."""
@@ -45,8 +43,9 @@ class Request:
     def get_lists(self, addon_name):
         pass
     
-    def get_details(self, addon_id):
-        url = path.join(self.source.base_url, addon_id)
+    def get_details(self, addon_name):
+        """get an specific addon's detail via addon name"""
+        url = path.join(self.source.base_url, addon_name)
         res = requests.get(url=url, headers=self.headers)
         helpers.cache_response(res)
         return self.source.analyze_details(res)

@@ -11,34 +11,47 @@
     :email: qwezarty@gmail.com
 """
 
-from requests import Response
+import requests
 from pathlib import Path
 from os import path
+import base64
 from lxml import etree
 
 root_path = Path(__file__).parent
 
-def cache_response(res):
+def cache_response(res, name='last_response.html'):
     """cache last response"""
     """located at cache/last_*_response.html"""
-    if not isinstance(res, Response):
+    if not isinstance(res, requests.Response):
         raise TypeError('cache response type only can be requests/Response')
     
-    rel_path = ''
+    file_name = ''
     if res.status_code == 200:
-        rel_path = 'cache/last_success_response.html'
+        file_name = ''.join(['success_', name])
     else:
-        rel_path = 'cache/last_error_response.html'
+        file_name = ''.join(['error_', name])
 
-    abs_path = path.join(root_path, rel_path)
+    abs_path = path.join(root_path, 'cache', file_name)
     with open(abs_path, 'w+') as f:
         f.write(res.text)
 
+def get_and_cache(url, params=None, **kwargs):
+    """get from cache if last response is success and less than 10 min"""
+    """or get and cache response"""
+    file_name = base64.encodestring(url.encode('utf-8')).decode('utf-8') + '.html'
+    abs_success_path = path.join(root_path, 'cache', 'success_' + file_name)
+    if path.exists(abs_success_path):
+        res = requests.Response()
+        res.status_code = 200
+        res.url = url
+        with open(abs_success_path, 'r') as f:
+            res.text = f.read()
+        return res
+    res = requests.get(url, params, **kwargs)
+    cache_response(res, file_name)
+    return res
+
 def xpath_text(html, xpath):
-    import ipdb
-    ipdb.set_trace()
-    if not isinstance(html, str):
-        raise TypeError('type could only be xx when')
     nodes = html.xpath(xpath)
     assert len(nodes) == 1, 'node selected by xpath could only be 1'
     return nodes[0].text
