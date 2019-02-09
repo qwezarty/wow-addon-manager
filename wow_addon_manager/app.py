@@ -14,6 +14,7 @@
 import sys
 import os
 from .config import Config
+from .request import Request
 
 class App:
     """main application"""
@@ -23,8 +24,9 @@ class App:
         if root_path is None:
             root_path = self.get_root_path(import_name)
         self.root_path = root_path
-        self.system_config = self.make_config("configs/system.json")
-        self.user_config = self.make_config(self.system_config["user_config"])
+        self.system_config = self.make_config('configs/system.json')
+        self.user_config = self.make_config(self.system_config['user_config'])
+        self.request =  self.make_request(self.user_config['source'])
 
     def get_root_path(self, import_name):
         """find the root path of the package"""
@@ -40,3 +42,12 @@ class App:
         config = Config(self.root_path)
         config.from_json(file_name)
         return config
+
+    def make_request(self, source_name):
+        """get an instance of SourceRequest, according to source_name"""
+        return Request(root_path=self.root_path)
+    
+    def search(self, addon_name):
+        """search a spesific addon."""
+        addon = self.request.get_details(addon_name)
+        print(addon)

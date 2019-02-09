@@ -45,7 +45,7 @@ class Config(dict):
             with open(filename) as json_file:
                 obj = json.loads(json_file.read())
         except IOError as error:
-            error.strerror = 'Unable to load json file, (%s)' % error.strerror
+            error.strerror = 'unable to load json file, (%s)' % error.strerror
             raise
         return self.from_mapping(obj)
 

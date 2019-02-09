@@ -13,10 +13,10 @@
 
 import sys
 import argparse
-from wow_addon_manager import install
-from wow_addon_manager import search
+from wow_addon_manager.app import App
 
 def _parse_args():
+    """return a parser with arguments and values"""
     parser = argparse.ArgumentParser()
 
     _init_general_parsers(parser)
@@ -29,6 +29,7 @@ def _parse_args():
     return parser.parse_args()
 
 def _init_general_parsers(parser):
+    """initialize global cli arguments"""
     parser.add_argument(
         '-v', '--version',
         action = 'version',
@@ -37,14 +38,14 @@ def _init_general_parsers(parser):
     )
 
 def _init_subparsers(parent):
+    """initialize cli sub-positional arguments"""
     subparsers = parent.add_subparsers()
 
     parser_install = subparsers.add_parser(
         'install',
         help = 'install a specific addon.'
     )
-    install.init_parser(parser_install)
-    parser_install.set_defaults(func=install.main)
+    parser_install.set_defaults(func=install)
     parser_install.add_argument(
         "addon",
         help = "the addon you want to install"
@@ -54,18 +55,23 @@ def _init_subparsers(parent):
         'search',
         help = 'search for addons.'
     )
-    search.init_parser(parser_search)
-    parser_search.set_defaults(func=search.main)
+    parser_search.set_defaults(func=search)
     parser_search.add_argument(
         "addon",
         help = "the addon you want to search"
     )
 
+app = App(__name__)
+
+def search(args):
+    app.search(args.addon)
+
+def install(args):
+    pass
+
 def main():
     # print('welcome to use wow-addon-manager cli tool!')
-    # if args is None:
-    #     print("you should add a sub-command")
-    
     args = _parse_args()
     if hasattr(args, 'func'):
         args.func(args)
+
