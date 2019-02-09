@@ -104,3 +104,6 @@ ENV/
 /.vscode
 *.swp
 *.DS_Store
+
+# cache files
+wow_addon_manager/cache/*
