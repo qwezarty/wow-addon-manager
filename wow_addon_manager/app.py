@@ -15,6 +15,9 @@ import sys
 import os
 from .config import Config
 from .request import Request
+import zipfile
+from wow_addon_manager import helpers
+from os import path
 
 class App:
     """main application"""
@@ -38,16 +41,22 @@ class App:
         return os.getcwd()
     
     def make_config(self, file_name):
-        """get an instance of Config, and load a json file"""
+        """get an instance of Config, and load a json file."""
         config = Config(self.root_path)
         config.from_json(file_name)
         return config
 
     def make_request(self, source_name):
-        """get an instance of SourceRequest, according to source_name"""
+        """get an instance of SourceRequest, according to source_name."""
         return Request(root_path=self.root_path)
     
     def search(self, addon_name):
-        """search a spesific addon."""
+        """search a specific addon."""
         addon = self.request.get_details(addon_name)
         print(addon)
+
+    def install(self, addon_id):
+        """install a specific addon."""
+        zip_file = self.request.download_to_cache(addon_id)
+        dst_folder = path.join(self.user_config['wow_root_folder'], 'interface', 'addons')
+        helpers.extract_to_dst(zip_file, dst_folder)

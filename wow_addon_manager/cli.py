@@ -67,7 +67,7 @@ def search(args):
     app.search(args.addon)
 
 def install(args):
-    pass
+    app.install(args.addon)
 
 def main():
     # print('welcome to use wow-addon-manager cli tool!')

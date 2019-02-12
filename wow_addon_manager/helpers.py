@@ -13,9 +13,11 @@
 
 import requests
 from pathlib import Path
-from os import path
+from os import path, mkdir, listdir, remove
+from shutil import copytree, copy2, rmtree
 import base64
 from lxml import etree
+import zipfile
 
 root_path = Path(__file__).parent
 
@@ -51,7 +53,96 @@ def get_and_cache(url, params=None, **kwargs):
     cache_response(res, file_name)
     return res
 
-def xpath_text(html, xpath):
+def xpath_text(html, xpath, attr=''):
+    """use xpath to get element's attribute from html"""
+    """by default, it gets the text of node"""
     nodes = html.xpath(xpath)
     assert len(nodes) == 1, 'node selected by xpath could only be 1'
-    return nodes[0].text
+    node = nodes[0]
+    if attr == '':
+        return node.text
+    else:
+        return node.get(attr)
+
+def extract_to_dst(src, dst):
+    """extract addon src zip file to destination."""
+    copied_items = []
+    zip_file = path.basename(src)
+    zip_name, _ = path.splitext(zip_file)
+    cache_path = path.join(root_path, 'cache', zip_name)
+    with zipfile.ZipFile(src, 'r') as z:
+        # create folder and extract to cache
+        mkdir(cache_path)
+        z.extractall(cache_path)
+        trim_os_hidden_files(cache_path)
+
+        top_levels = [path.join(cache_path, c) for c in listdir(cache_path)]
+        if len(top_levels) > 1:
+            # zip's top-level has multiple files or folder
+            # if it contains only folders, we should copy everything to dst
+            # otherwize, this is not a standard addon package, we should raise an exception
+            if not only_dirs_or_not(cache_path):
+                remove_src(cache_path)
+                raise Exception('addon-zip contents contain file, this is not a standard addon.')
+            results = copy_contents(cache_path, dst)
+            copied_items.extend(results)
+        elif len(top_levels) == 1:
+            if not only_dirs_or_not(top_levels[0]):
+                # extracted-folder which contains files and folders.
+                # it means that we only should copy this folder to dst
+                result = copy_src_to_dst(top_levels[0], dst)
+                copied_items.append(result)
+            else:
+                # extracted-folder which contains only folders. 
+                # it means that we should copy every sub-folders to dst
+                results = copy_contents(top_levels[0], dst)
+                copied_items.extend(results)
+    # delete cache folder before return
+    remove_src(cache_path)
+    return copied_items
+
+def trim_os_hidden_files(abs_path):
+    """trim os hidden files and folder like: .DS_Store, """
+    pass
+
+def only_dirs_or_not(abs_path):
+    """check abs_path's contents."""
+    """return True if they are all folders, or False if any file."""
+    contents = listdir(abs_path)
+    for c in contents:
+        abs_c = path.join(abs_path, c)
+        if not path.isdir(abs_c):
+            return False
+    return True
+
+def copy_contents(src, dst):
+    """copy every src's contents to dst."""
+    """if dst is already existed, remove it before copy."""
+    copied_items = []
+    contents = listdir(src)
+    for c in contents:
+        abs_c = path.join(src, c)
+        abs_dst = copy_src_to_dst(abs_c, dst)
+        copied_items.append(abs_dst)
+    return copied_items
+
+def copy_src_to_dst(src, dst_dir):
+    """copy src to dst. works for both file and dir."""
+    """if dst is already existed, remove it first then copy."""
+    abs_dst = path.join(dst_dir, path.basename(src))
+    if path.isdir(src):
+        if path.exists(abs_dst):
+            rmtree(abs_dst)
+        copytree(src, abs_dst)
+    else:
+        if path.exists(abs_dst):
+            remove(abs_dst)            
+        copy2(src, abs_dst)
+    return abs_dst
+
+def remove_src(src):
+    """recursively remove if src is a folder, or remove if src is a file."""
+    if path.isdir(src):
+        rmtree(src)
+    else:
+        remove(src)
