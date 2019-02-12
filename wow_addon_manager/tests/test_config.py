@@ -19,5 +19,5 @@ def test_config_from_system_json_file():
     assert app.system_config['secret_key'] == 'devkey'
 
 def test_config_from_user_json_file():
-    assert app.user_config['source'] == 'curse'
+    assert app.user_config['source'] == 'curseforge'
     assert len(app.user_config['addons'])
