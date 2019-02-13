@@ -42,7 +42,7 @@ class Config(dict):
         """load a json file and add them to self"""
         filename = os.path.join(self.root_path, file_name)
         try:
-            with open(filename) as json_file:
+            with open(filename, encoding='utf-8') as json_file:
                 obj = json.loads(json_file.read())
         except IOError as error:
             error.strerror = 'unable to load json file, (%s)' % error.strerror

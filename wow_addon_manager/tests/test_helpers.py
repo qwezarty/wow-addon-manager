@@ -42,7 +42,7 @@ def test_only_dirs_or_not():
     dir_and_file_rdme = path.join(dir_and_file, 'readme')
     mkdir(dir_and_file)
     mkdir(dir_and_file_folder)
-    with open(dir_and_file_rdme, 'w+') as f:
+    with open(dir_and_file_rdme, 'w+', encoding='utf-8') as f:
         f.write('readme')
     assert not helpers.only_dirs_or_not(dir_and_file), 'only dirs should return False.'
     rmtree(dir_and_file)
@@ -58,9 +58,9 @@ def test_copy_contents():
     mkdir(addon_path)
     mkdir(addon_main)
     mkdir(addon_sub)
-    with open(addon_rdme, 'w+') as f:
+    with open(addon_rdme, 'w+', encoding='utf-8') as f:
         f.write('readme')
-    with open(addon_toc, 'w+') as f:
+    with open(addon_toc, 'w+', encoding='utf-8') as f:
         f.write('addon_main.toc')
     # create addon_main which already existed inside dst
     dst = path.join(root_path, 'tests', 'dst', 'addon')

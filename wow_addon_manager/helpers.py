@@ -34,7 +34,7 @@ def cache_response(res, name='last_response.html'):
         file_name = ''.join(['error_', name])
 
     abs_path = path.join(root_path, 'cache', file_name)
-    with open(abs_path, 'w+') as f:
+    with open(abs_path, 'w+', encoding='utf-8') as f:
         f.write(res.text)
 
 def get_and_cache(url, params=None, **kwargs):
@@ -46,7 +46,7 @@ def get_and_cache(url, params=None, **kwargs):
         res = requests.Response()
         res.status_code = 200
         res.url = url
-        with open(abs_success_path, 'r') as f:
+        with open(abs_success_path, 'r', encoding='utf-8') as f:
             res.text = f.read()
         return res
     res = requests.get(url, params, **kwargs)
