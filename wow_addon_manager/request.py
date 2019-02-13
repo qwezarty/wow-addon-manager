@@ -52,7 +52,7 @@ class Request:
     def get_info(self, addon_id):
         """get an specific addon's detail via addon id"""
         url = self.source.get_info_url(addon_id)
-        params = self.source.get_search_qs(addon_id)
+        params = self.source.get_info_qs(addon_id)
         res = requests.get(url=url, headers=self.headers, params=params)
         helpers.cache_response(res)
         return self.source.analyze_info(res)
