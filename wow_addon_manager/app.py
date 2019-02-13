@@ -50,13 +50,23 @@ class App:
         """get an instance of SourceRequest, according to source_name."""
         return Request(root_path=self.root_path)
     
-    def search(self, addon_name):
-        """search a specific addon."""
-        addon = self.request.get_details(addon_name)
-        print(addon)
+    def info(self, addon_id):
+        """show the infomations of a specific addon."""
+        addon = self.request.get_info(addon_id)
+        print('name: ', addon['name'])
+        print('install-id: ', addon['id'])
+        print('game-version: ', addon['game_version'])
+        print('last-update', addon['last_update'])
+        print('addon-homepage', addon['addon_url'])
 
     def install(self, addon_id):
         """install a specific addon."""
         zip_file = self.request.download_to_cache(addon_id)
         dst_folder = path.join(self.user_config['wow_root_folder'], 'interface', 'addons')
         helpers.extract_to_dst(zip_file, dst_folder)
+
+    def search(self, addon_name):
+        """search the addon you want."""
+        addons = self.request.get_list(addon_name)
+        for a in addons:
+            print('%-40s%-20s' % (a['id'], a['last_update']))

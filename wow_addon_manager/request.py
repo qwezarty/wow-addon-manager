@@ -41,19 +41,25 @@ class Request:
         curseforge and wowinterface is supported for now."""
         self.source = self._get_source(source_name)
     
-    def get_lists(self, addon_name):
-        pass
-    
-    def get_details(self, addon_id):
-        """get an specific addon's detail via addon id"""
-        url = path.join(self.source.base_url, addon_id)
-        res = requests.get(url=url, headers=self.headers)
+    def get_list(self, addon_name):
+        """get a list of addon you search via addon name"""
+        url = self.source.get_search_url(addon_name)
+        params = self.source.get_search_qs(addon_name)
+        res = requests.get(url=url, headers=self.headers, params=params)
         helpers.cache_response(res)
-        return self.source.analyze_details(res)
+        return self.source.analyze_search(res)
+    
+    def get_info(self, addon_id):
+        """get an specific addon's detail via addon id"""
+        url = self.source.get_info_url(addon_id)
+        params = self.source.get_search_qs(addon_id)
+        res = requests.get(url=url, headers=self.headers, params=params)
+        helpers.cache_response(res)
+        return self.source.analyze_info(res)
 
     def download_to_cache(self, addon_id):
         """download addon to cache and return absolute path of zip file."""
-        addon = self.get_details(addon_id)
+        addon = self.get_info(addon_id)
         s = requests.session()
         res = s.get(addon['download_url'])
         abs_path = path.join(self.root_path, 'cache', addon['name'] + '.zip')

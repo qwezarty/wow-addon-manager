@@ -41,6 +41,7 @@ def _init_subparsers(parent):
     """initialize cli sub-positional arguments"""
     subparsers = parent.add_subparsers()
 
+    # install
     parser_install = subparsers.add_parser(
         'install',
         help = 'install a specific addon.'
@@ -48,9 +49,21 @@ def _init_subparsers(parent):
     parser_install.set_defaults(func=install)
     parser_install.add_argument(
         "addon",
-        help = "the addon you want to install"
+        help = "the addon you want to install."
     )
 
+    # info
+    parser_search = subparsers.add_parser(
+        'info',
+        help = 'show the information of specific addon.'
+    )
+    parser_search.set_defaults(func=info)
+    parser_search.add_argument(
+        "addon",
+        help = "the addon you want to show the info."
+    )
+
+    # search 
     parser_search = subparsers.add_parser(
         'search',
         help = 'search for addons.'
@@ -58,16 +71,19 @@ def _init_subparsers(parent):
     parser_search.set_defaults(func=search)
     parser_search.add_argument(
         "addon",
-        help = "the addon you want to search"
+        help = "the addon you want to search."
     )
 
 app = App(__name__)
 
-def search(args):
-    app.search(args.addon)
+def info(args):
+    app.info(args.addon)
 
 def install(args):
     app.install(args.addon)
+
+def search(args):
+    app.search(args.addon)
 
 def main():
     # print('welcome to use wow-addon-manager cli tool!')
