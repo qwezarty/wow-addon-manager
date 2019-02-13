@@ -5,6 +5,23 @@
 [![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)]( https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)
 [![切换中文](https://img.shields.io/badge/README-%20切换中文-yellow.svg)](README_zh.md)
 
+## Project status
+
+Just finish search && install at 12.Feb! I'm trying to release v1.0 before March! 
+
+| Task                      | Status                           |
+|:--------------------------|:--------------------------------:|
+| scaffolds && cli entrance |                            Done! |
+| system && user configs    |                            Done! |
+| module: info              |                            Done! |
+| module: install           |                            Done! |
+| module: search            |      in-progress, planned 14 Feb |
+| module: update            |      in-progress, planned 16 Feb |
+| module: remove            |      not started, planned 18 Feb |
+| module: upgrade           |       not started, planed 21 Feb |
+| module: scan              |      not started, planned 25 Feb |
+| release v1.0              |             planned before March |
+
 ## Important
 
 The purpose to build *wow-addon-manager* at the very beginning is to make an alternative **cli tool** to *Curse Client (integrate with Twich now, I don't like this)*.
@@ -17,15 +34,15 @@ I'm enthusiastically hope you can join me and make any improvements or suggestio
 
 ## Features will be supported
 
-- source: curseforge(in process), wowinterface(planned)
+- source: curseforge(in progress), wowinterface(planned)
 
-- search/detail/install/remove addons(in process)
+- search/detail/install/update/remove addons(in progress)
 
-- check if there're addons outdated and update them(in process)
+- check if there're addons outdated and update them all(planned)
 
 - local addons auto detected(planned)
 
-- windows 10 will be full supported at release v1.0
+- windows-10 && macOS will both be full supported at release v1.0
 
 ## Setup notes
 
@@ -39,11 +56,11 @@ git clone https://github.com/qwezarty/wow-addon-manager.git
 # go into the repository
 cd wow-addon-manager
 # install dependencies(or using 'sudo' prefix if permission denied)
-pip install -r requires.txt
+pip install -r requirements.txt
 # run the app
-python wow-addon-manager/app.py
+python wow-addon-manager info gtfo
 ```
 
 ## Usage and config
 
-will be added later.
+Will be added with release v1.0.
