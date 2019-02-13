@@ -2,8 +2,22 @@
     "source": "curseforge",
     "wow_root_folder": "/Volumes/extDisk/Blizzard/World of Warcraft/_retail_",
     "addons": [
-        "adibags",
-        "bigwigs",
-        "details"
+        "angry-keystones",
+        "gtfo",
+        "weakauras-2",
+        "details",
+        "gottagofast",
+        "masque",
+        "masqueelvuiesqueskin",
+        "big-wigs",
+        "little-wigs",
+        "opie",
+        "opie-masque",
+        "pawn",
+        "world-quest-tracker",
+        "simulationcraft",
+        "method-dungeon-tools",
+        "libsharedmedia-3-0",
+        "sharedmedia"
     ]
 }

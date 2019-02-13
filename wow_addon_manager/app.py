@@ -12,12 +12,11 @@
 """
 
 import sys
-import os
 from .config import Config
 from .request import Request
 import zipfile
 from wow_addon_manager import helpers
-from os import path
+from os import path, getcwd, mkdir, makedirs
 
 class App:
     """main application"""
@@ -29,16 +28,26 @@ class App:
         self.root_path = root_path
         self.system_config = self.make_config('configs/system.json')
         self.user_config = self.make_config(self.system_config['user_config'])
+        self.addons_dir = path.join(self.user_config['wow_root_folder'], 'Interface', 'Addons')
         self.request =  self.make_request(self.user_config['source'])
+        self.init_dirs()
 
     def get_root_path(self, import_name):
         """find the root path of the package"""
         mod = sys.modules.get(import_name)
         if mod is not None and hasattr(mod, '__file__'):
-            return os.path.dirname(os.path.abspath(mod.__file__))
+            return path.dirname(path.abspath(mod.__file__))
         # loader = pkgutil.get_loader(import_name)
         # if loader is None or import_name == '__main__':
-        return os.getcwd()
+        return getcwd()
+
+    def init_dirs(self):
+        """init folders if not existed."""
+        cache_dir = path.join(self.root_path, 'cache')
+        if not path.exists(cache_dir):
+            mkdir(cache_dir)
+        if not path.exists(self.addons_dir):
+            makedirs(self.addons_dir)
     
     def make_config(self, file_name):
         """get an instance of Config, and load a json file."""
@@ -62,8 +71,7 @@ class App:
     def install(self, addon_id):
         """install a specific addon."""
         zip_file = self.request.download_to_cache(addon_id)
-        dst_folder = path.join(self.user_config['wow_root_folder'], 'interface', 'addons')
-        helpers.extract_to_dst(zip_file, dst_folder)
+        helpers.extract_to_dst(zip_file, self.addons_dir)
 
     def search(self, addon_name):
         """search the addon you want."""
