@@ -12,3 +12,15 @@ def test_default_source():
 def test_change_source():
     app.request.change_source('wowinterface')
     assert app.request.source_name == 'wowinterface'
+
+def test_curseforge_get_info():
+    app.request.change_source('curseforge')
+    addon = app.request.get_info('gtfo')
+    assert addon['id'] == 'gtfo'
+    assert addon['name'] == 'GTFO'
+    assert addon['game_version'], 'game_version should not be None or empty.'
+    assert addon['last_update'], 'last_update should not be None or empty.'
+    assert addon['description'], 'description should not be None or empty.'
+    assert addon['addon_url'], 'addon-url should not be None or empty.'
+    assert addon['download_url'], 'download-url should not be None or empty.'
+    assert addon['image'], 'image-url should not be None or empty.'

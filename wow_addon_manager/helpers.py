@@ -33,7 +33,10 @@ def cache_response(res, name='last_response.html'):
     else:
         file_name = ''.join(['error_', name])
 
-    abs_path = path.join(root_path, 'cache', file_name)
+    cache_dir = path.join(root_path, 'cache')
+    if not path.exists(cache_dir):
+        mkdir(cache_dir)
+    abs_path = path.join(cache_dir, file_name)
     with open(abs_path, 'w+', encoding='utf-8') as f:
         f.write(res.text)
 
