@@ -2,8 +2,8 @@
 
 *A **cli tool** for maintaining **World of Warcraft** addons. Built with python3.7.*
 
-[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)]( https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)
-[![切换中文](https://img.shields.io/badge/README-%20切换中文-yellow.svg)](README_zh.md)
+[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)](https://travis-ci.org/qwezarty/wow-addon-manager)
+[![切换中文](https://img.shields.io/badge/README-切换中文-yellow.svg)](README_zh.md)
 
 ## Project status
 
@@ -15,7 +15,7 @@ Just finish search && install at 12.Feb! I'm trying to release v1.0 before March
 | system && user configs    |                            Done! |
 | module: info              |                            Done! |
 | module: install           |                            Done! |
-| module: search            |      in-progress, planned 14 Feb |
+| module: search            |                            Done! |
 | module: update            |      in-progress, planned 16 Feb |
 | module: remove            |      not started, planned 18 Feb |
 | module: upgrade           |       not started, planed 21 Feb |

@@ -2,8 +2,8 @@
 
 *这是一个**魔兽世界**的**命令行**插件管理工具. 使用Python3.7构建.*
 
-[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)]( https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)
-[![Change Language](https://img.shields.io/badge/README-%20English-yellow.svg)](README.md)
+[![Build Status](https://travis-ci.org/qwezarty/wow-addon-manager.svg?branch=master)](https://travis-ci.org/qwezarty/wow-addon-manager)
+[![Change Language](https://img.shields.io/badge/README-English-yellow.svg)](README.md)
 
 ## 开发进度
 
@@ -15,7 +15,7 @@ info && install 在2月12日已经完成！我尽量在三月前发布v1.0版本
 | 用户和系统配置              |                            完成！ |
 | 模块：info                 |                            完成！ |
 | 模块: install              |                            完成！ |
-| 模块: search               |                 进行中，计划2月14日 |
+| 模块: search               |                            完成！ |
 | 模块: update               |                 进行中，计划2月16日 |
 | 模块: remove               |                 未开始，计划2月18日 |
 | 模块: upgrade              |                 未开始，计划2月21日 |
