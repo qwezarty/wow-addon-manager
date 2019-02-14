@@ -46,6 +46,8 @@ class App:
         cache_dir = path.join(self.root_path, 'cache')
         if not path.exists(cache_dir):
             mkdir(cache_dir)
+        if self.system_config['run_mode'] == 'test':
+            self.addons_dir = path.join(self.root_path, 'tests', 'dst', 'Interface', 'Addons')
         if not path.exists(self.addons_dir):
             makedirs(self.addons_dir)
     

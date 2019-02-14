@@ -7,6 +7,7 @@ from shutil import rmtree, copy2
 
 root_path = Path(__file__).parent.parent
 app = App(__name__, root_path)
+app.system_config['run_mode'] == 'test'
 
 def test_init_dirs():
     interface_dir = path.join(root_path, 'tests', 'dst', 'Interface')

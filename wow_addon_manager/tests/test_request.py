@@ -5,6 +5,7 @@ from pathlib import Path
 from wow_addon_manager.app import App
 
 app = App(__name__, Path(__file__).parent.parent)
+app.system_config['run_mode'] == 'test'
 
 def test_default_source():
     assert app.request.source_name == 'curseforge'

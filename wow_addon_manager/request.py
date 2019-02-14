@@ -53,7 +53,7 @@ class Request:
     
     def get_info(self, addon_id):
         """get an specific addon's detail via addon id"""
-        print('===> Collecting metadata of %s...' % addon_id, end='')
+        print('===> Collecting metadata...', end='')
         url = self.source.get_info_url(addon_id)
         params = self.source.get_info_qs(addon_id)
         res = requests.get(url=url, headers=self.headers, params=params)
@@ -64,15 +64,10 @@ class Request:
     def download_to_cache(self, addon_id):
         """download addon to cache and return absolute path of zip file."""
         addon = self.get_info(addon_id)
-        s = requests.session()
-        print('===> Collecting download url of %s...' % addon_id, end='')
-        res = s.get(addon['download_url'])
-        print('Done!')
+        print('===> Downloading...', end='')
+        res = requests.get(addon['download_url'], headers=self.headers)
         abs_path = path.join(self.root_path, 'cache', addon['name'] + '.zip')
-        print('===> Downloading addon: %s...' % addon_id, end='')
         with open(abs_path, 'wb+') as f:
             f.write(res.content)
-        s.close()
         print('Done!')
         return abs_path
-

@@ -6,6 +6,7 @@ from wow_addon_manager.app import App
 
 root_path = Path(__file__).parent.parent
 app = App(__name__, root_path)
+app.system_config['run_mode'] == 'test'
 
 def test_config_from_mapping():
     app.system_config.from_mapping({
