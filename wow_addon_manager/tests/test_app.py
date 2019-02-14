@@ -2,8 +2,8 @@
 
 from wow_addon_manager.app import App
 from pathlib import Path
-from os import path
-from shutil import rmtree
+from os import path, remove
+from shutil import rmtree, copy2
 
 root_path = Path(__file__).parent.parent
 app = App(__name__, root_path)
@@ -24,3 +24,14 @@ def test_init_dirs():
 
     rmtree(cache_path)
     rmtree(interface_dir)
+
+def test_get_user_config_path():
+    user_sample_json = path.join(root_path, 'configs', 'user.sample.json')
+    user_json = path.join(root_path, 'configs', 'user.json')
+    if not path.exists(user_json):
+        copy2(user_sample_json, user_json)
+    result = app.get_user_config_path()
+    assert path.exists(result) and result == user_json, 'if user.json exists, app should load user-config from it.'
+    remove(user_json)
+    result = app.get_user_config_path()
+    assert path.exists(result) and result == user_sample_json, 'if user.json not exists, app should load user-sample-config from it.'

@@ -38,16 +38,21 @@ class Config(dict):
                 self[key] = value
         return True
 
-    def from_json(self, file_name):
-        """load a json file and add them to self"""
-        filename = os.path.join(self.root_path, file_name)
+    def from_rel_json(self, file_name):
+        """load a relative json file and add them to self"""
+        abs_path = os.path.join(self.root_path, file_name)
+        self.from_abs_json(abs_path)
+
+    def from_abs_json(self, abs_path):
+        """load a absolute json file and add them to self"""
         try:
-            with open(filename, encoding='utf-8') as json_file:
+            with open(abs_path, encoding='utf-8') as json_file:
                 obj = json.loads(json_file.read())
         except IOError as error:
             error.strerror = 'unable to load json file, (%s)' % error.strerror
             raise
         return self.from_mapping(obj)
+
 
 
 if __name__ == "__main__":

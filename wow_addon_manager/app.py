@@ -26,8 +26,8 @@ class App:
         if root_path is None:
             root_path = self.get_root_path(import_name)
         self.root_path = root_path
-        self.system_config = self.make_config('configs/system.json')
-        self.user_config = self.make_config(self.system_config['user_config'])
+        self.system_config = self.make_config('configs/system.json', relative=True)
+        self.user_config = self.make_config(self.get_user_config_path(), relative=False)
         self.addons_dir = path.join(self.user_config['wow_root_folder'], '_retail_', 'Interface', 'Addons')
         self.request =  self.make_request(self.user_config['source'])
         self.init_dirs()
@@ -49,10 +49,26 @@ class App:
         if not path.exists(self.addons_dir):
             makedirs(self.addons_dir)
     
-    def make_config(self, file_name):
+    def get_user_config_path(self):
+        """get user config file in system.json, or using default file, i.e. user.sample.json"""
+        user_path = path.join(self.root_path, self.system_config['user_config'])
+        default_path = path.join(self.root_path, 'configs', 'user.sample.json')
+        if path.exists(user_path):
+            return user_path
+        print('user configed file not existed! using default config.')
+        if path.exists(default_path):
+            return default_path
+        print('default configed file also not existed!')
+        import sys
+        sys.exit(1)
+    
+    def make_config(self, file_path, relative=False):
         """get an instance of Config, and load a json file."""
         config = Config(self.root_path)
-        config.from_json(file_name)
+        if relative:
+            config.from_rel_json(file_path)
+        else:
+            config.from_abs_json(file_path)
         return config
 
     def make_request(self, source_name):
