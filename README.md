@@ -32,6 +32,14 @@ Now here is what you want if you're a *wower && developer*.
 
 I'm enthusiastically hope you can join me and make any improvements or suggestions to it.
 
+## Screenshots
+
+![search](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/search.png)
+
+![info](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/info.png)
+
+![install](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/install.png)
+
 ## Features will be supported
 
 - source: curseforge(in progress), wowinterface(planned)

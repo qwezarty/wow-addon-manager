@@ -13,7 +13,7 @@ info && install 在2月12日已经完成！我尽量在三月前发布v1.0版本
 |:--------------------------|:--------------------------------:|
 | 构架 && 命令行入口          |                            完成！ |
 | 用户和系统配置              |                            完成！ |
-| 模块：info                 |                            完成！ |
+| 模块: info                 |                            完成！ |
 | 模块: install              |                            完成！ |
 | 模块: search               |                            完成！ |
 | 模块: update               |                 进行中，计划2月16日 |
@@ -31,6 +31,14 @@ info && install 在2月12日已经完成！我尽量在三月前发布v1.0版本
 如果你是一个*魔兽世界肝帝 & 996的码奴*，我相信你会喜欢使用它.
 
 非常非常希望你能够加入这个项目，去为它提出一些建议或改善代码和细节.
+
+## 使用截图
+
+![search](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/search.png)
+
+![info](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/info.png)
+
+![install](https://github.com/qwezarty/wow-addon-manager/raw/master/screenshots/install.png)
 
 ## 将会支持的特性
 
