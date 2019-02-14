@@ -28,7 +28,7 @@ class App:
         self.root_path = root_path
         self.system_config = self.make_config('configs/system.json')
         self.user_config = self.make_config(self.system_config['user_config'])
-        self.addons_dir = path.join(self.user_config['wow_root_folder'], 'Interface', 'Addons')
+        self.addons_dir = path.join(self.user_config['wow_root_folder'], '_retail_', 'Interface', 'Addons')
         self.request =  self.make_request(self.user_config['source'])
         self.init_dirs()
 
