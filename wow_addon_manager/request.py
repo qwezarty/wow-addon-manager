@@ -43,28 +43,36 @@ class Request:
     
     def get_list(self, addon_name):
         """get a list of addon you search via addon name"""
+        print('===> Searching %s from %s...' %(addon_name, self.source_name), end='')
         url = self.source.get_search_url(addon_name)
         params = self.source.get_search_qs(addon_name)
         res = requests.get(url=url, headers=self.headers, params=params)
         helpers.cache_response(res)
+        print('Done!')
         return self.source.analyze_search(res)
     
     def get_info(self, addon_id):
         """get an specific addon's detail via addon id"""
+        print('===> Collecting metadata of %s...' % addon_id, end='')
         url = self.source.get_info_url(addon_id)
         params = self.source.get_info_qs(addon_id)
         res = requests.get(url=url, headers=self.headers, params=params)
         helpers.cache_response(res)
+        print('Done!')
         return self.source.analyze_info(res)
 
     def download_to_cache(self, addon_id):
         """download addon to cache and return absolute path of zip file."""
         addon = self.get_info(addon_id)
         s = requests.session()
+        print('===> Collecting download url of %s...' % addon_id, end='')
         res = s.get(addon['download_url'])
+        print('Done!')
         abs_path = path.join(self.root_path, 'cache', addon['name'] + '.zip')
+        print('===> Downloading addon: %s...' % addon_id, end='')
         with open(abs_path, 'wb+') as f:
             f.write(res.content)
         s.close()
+        print('Done!')
         return abs_path
 

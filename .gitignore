@@ -99,11 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+wow_addon_manager/cache/*
+wow_addon_manager/configs/user.json
 
 # Ide and Platform
 /.vscode
 *.swp
 *.DS_Store
-
-# cache files
-wow_addon_manager/cache/*

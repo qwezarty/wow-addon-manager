@@ -87,7 +87,9 @@ class App:
     def install(self, addon_id):
         """install a specific addon."""
         zip_file = self.request.download_to_cache(addon_id)
+        print('===> Installing...', end='')
         helpers.extract_to_dst(zip_file, self.addons_dir)
+        print('Done!')
 
     def search(self, addon_name):
         """search the addon you want."""
