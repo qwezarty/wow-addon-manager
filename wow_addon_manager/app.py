@@ -30,7 +30,6 @@ class App:
         self.user_config = self.make_config(self.get_user_config_path(), relative=False)
         self.addons_dir = path.join(self.user_config['wow_root_folder'], '_retail_', 'Interface', 'Addons')
         self.request =  self.make_request(self.user_config['source'])
-        self.init_dirs()
 
     def get_root_path(self, import_name):
         """find the root path of the package"""
@@ -41,12 +40,11 @@ class App:
         # if loader is None or import_name == '__main__':
         return getcwd()
 
-    def init_dirs(self):
+    def init_install_dirs(self):
         """init folders if not existed."""
-        cache_dir = path.join(self.root_path, 'cache')
-        if not path.exists(cache_dir):
-            mkdir(cache_dir)
         if self.system_config['run_mode'] == 'test':
+            import pdb
+            pdb.set_trace()
             self.addons_dir = path.join(self.root_path, 'tests', 'dst', 'Interface', 'Addons')
         if not path.exists(self.addons_dir):
             makedirs(self.addons_dir)
@@ -88,6 +86,7 @@ class App:
 
     def install(self, addon_id):
         """install a specific addon."""
+        self.init_install_dirs()
         zip_file = self.request.download_to_cache(addon_id)
         print('===> Installing...', end='')
         helpers.extract_to_dst(zip_file, self.addons_dir)
