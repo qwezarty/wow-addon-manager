@@ -7,7 +7,7 @@
 
 ## Project status
 
-Just finish search && install at 12.Feb! I'm trying to release v1.0 before March! 
+Sorry for putting off everything by a month! v1.0 will be released at April! 
 
 | Task                      | Status                           |
 |:--------------------------|:--------------------------------:|
@@ -16,11 +16,11 @@ Just finish search && install at 12.Feb! I'm trying to release v1.0 before March
 | module: info              |                            Done! |
 | module: install           |                            Done! |
 | module: search            |                            Done! |
-| module: update            |      in-progress, planned 16 Feb |
-| module: remove            |      not started, planned 18 Feb |
-| module: upgrade           |       not started, planed 21 Feb |
-| module: scan              |      not started, planned 25 Feb |
-| release v1.0              |             planned before March |
+| module: update            |      in-progress, planned 16 Mar |
+| module: remove            |      not started, planned 18 Mar |
+| module: upgrade           |       not started, planed 21 Mar |
+| module: scan              |      not started, planned 25 Mar |
+| release v1.0              |                 planned at April |
 
 ## Important
 
